@@ -5,4 +5,7 @@ package example.test.phong.youtubealikeproject;
  */
 
 public class YoutubeService {
+    public YoutubeService() {
+
+    }
 }

@@ -10,17 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjection;
 import example.test.phong.youtubealikeproject.databinding.FragmentMainBinding;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends Fragment {
+    @Inject
+    YoutubeService mYoutubeService;
 
     private FragmentMainBinding mDatabinding;
     private ListVideoAdapter mAdapter;
 
     public MainFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AndroidSupportInjection.inject(this);
     }
 
     @Override
