@@ -1,15 +1,24 @@
 package example.test.phong.youtubealikeproject;
 
-import android.support.v4.app.Fragment;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import example.test.phong.youtubealikeproject.databinding.FragmentMainBinding;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends Fragment {
+
+    private FragmentMainBinding mDatabinding;
+    private ListVideoAdapter mAdapter;
 
     public MainFragment() {
     }
@@ -17,6 +26,22 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        mDatabinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
+        return mDatabinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView = mDatabinding.rcv;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new ListVideoAdapter();
+        recyclerView.setAdapter(mAdapter);
+
+        loadListVideo();
+    }
+
+    private void loadListVideo() {
+
     }
 }
