@@ -8,12 +8,15 @@ import org.schabi.newpipe.extractor.Info;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import example.test.phong.youtubealikeproject.MainActivity;
 
 /**
  * Created by user on 12/30/2017.
  */
-
+@Singleton
 public class InfoCache {
     private static final boolean DEBUG = MainActivity.DEBUG;
     private static final String TAG = InfoCache.class.getSimpleName();
@@ -25,6 +28,10 @@ public class InfoCache {
     private static final int MAX_ITEMS_ON_CACHE = 60;
 
     private static final LruCache<String, CacheData> lruCache = new LruCache<>(MAX_ITEMS_ON_CACHE);
+
+    @Inject
+    public InfoCache() {
+    }
 
     public void putInfo(@NonNull Info info) {
         if (DEBUG) Log.d(TAG, "putInfo() called with: info = [" + info + "]");

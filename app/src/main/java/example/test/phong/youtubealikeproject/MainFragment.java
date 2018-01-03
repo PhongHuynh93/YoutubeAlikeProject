@@ -31,7 +31,8 @@ import io.reactivex.schedulers.Schedulers;
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends Fragment {
-    private static final String MAIN_PAGE_SELECTED_SERVICE = "MAIN_PAGE_SELECTED_SERVICE";
+    private static final String SERVICE = "SERVICE";
+    private static final String KIOSID = "KIOSID";
     protected boolean DEBUG = MainActivity.DEBUG;
 
     @Inject
@@ -47,11 +48,13 @@ public class MainFragment extends Fragment {
 
     /**
      * @param serviceId
+     * @param kiosId like Trending
      */
-    public static MainFragment newInstance(int serviceId) throws ExtractionException {
+    public static MainFragment newInstance(int serviceId, String kiosId) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
-        args.putInt(MAIN_PAGE_SELECTED_SERVICE, serviceId);
+        args.putInt(SERVICE, serviceId);
+        args.putString(KIOSID, kiosId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,11 +64,12 @@ public class MainFragment extends Fragment {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
         if (getArguments() != null) {
-            mServiceId = getArguments().getInt(MAIN_PAGE_SELECTED_SERVICE);
+            mServiceId = getArguments().getInt(SERVICE);
+            mKiosId = getArguments().getString(KIOSID, "Trending");
             try {
-                mKiosId = NewPipe.getService(mServiceId)
-                        .getKioskList()
-                        .getDefaultKioskId();
+//                mKiosId = NewPipe.getService(mServiceId)
+//                        .getKioskList()
+//                        .getDefaultKioskId();
                 StreamingService service = NewPipe.getService(mServiceId);
                 UrlIdHandler kioskTypeUrlIdHandler = service.getKioskList()
                         .getUrlIdHandlerByType(mKiosId);

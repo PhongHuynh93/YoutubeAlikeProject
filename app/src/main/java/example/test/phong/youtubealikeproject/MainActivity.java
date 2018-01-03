@@ -8,8 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-
 import dagger.android.support.DaggerAppCompatActivity;
 import example.test.phong.youtubealikeproject.util.ActivityUtils;
 
@@ -37,13 +35,10 @@ public class MainActivity extends DaggerAppCompatActivity {
         MainFragment mainFragment =
                 (MainFragment) getSupportFragmentManager().findFragmentById(R.id.root);
         if (mainFragment == null) {
-            try {
-                mainFragment = MainFragment.newInstance(0);
-                ActivityUtils.addFragmentToActivity(
-                        getSupportFragmentManager(), mainFragment, R.id.root);
-            } catch (ExtractionException e) {
-                e.printStackTrace();
-            }
+            // FIXME: 1/4/2018 remove hardcode
+            mainFragment = MainFragment.newInstance(0, "Trending");
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), mainFragment, R.id.root);
         }
     }
 

@@ -8,6 +8,9 @@ import org.schabi.newpipe.extractor.kiosk.KioskInfo;
 
 import java.util.concurrent.Callable;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import example.test.phong.youtubealikeproject.MainActivity;
 import io.reactivex.Maybe;
 import io.reactivex.MaybeSource;
@@ -18,11 +21,12 @@ import io.reactivex.functions.Consumer;
 /**
  * Created by user on 12/30/2017.
  */
-
+@Singleton
 public class CustomExtractorHelper {
     private static final String TAG = CustomExtractorHelper.class.getSimpleName();
     private final InfoCache cache;
 
+    @Inject
     public CustomExtractorHelper(InfoCache cache) {
         this.cache = cache;
     }
