@@ -1,9 +1,11 @@
 package example.test.phong.youtubealikeproject.dagger.component;
 
+import android.app.Application;
+
 import javax.inject.Singleton;
 
+import dagger.BindsInstance;
 import dagger.Component;
-import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import example.test.phong.youtubealikeproject.App;
 import example.test.phong.youtubealikeproject.dagger.module.ActivityBuilder;
@@ -15,8 +17,14 @@ import example.test.phong.youtubealikeproject.dagger.module.AppModule;
 // used in support Fragment so we change from AndroidInjectionModule to AndroidSupportInjectionModule
 @Singleton
 @Component(modules = {AndroidSupportInjectionModule.class, AppModule.class, ActivityBuilder.class})
-public interface AppComponent extends AndroidInjector<App> {
+public interface AppComponent {
     @Component.Builder
-    abstract class Builder extends AndroidInjector.Builder<App> {
+    interface Builder {
+        @BindsInstance
+        Builder application(Application application);
+
+        AppComponent build();
     }
+
+    void inject(App app);
 }

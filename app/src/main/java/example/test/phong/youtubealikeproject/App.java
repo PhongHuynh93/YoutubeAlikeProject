@@ -1,16 +1,35 @@
 package example.test.phong.youtubealikeproject;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
+import android.app.Activity;
+import android.app.Application;
+
+import javax.inject.Inject;
+
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 import example.test.phong.youtubealikeproject.dagger.component.DaggerAppComponent;
 
 /**
  * Created by user on 12/30/2017.
  */
 
-public class App extends DaggerApplication {
+public class App extends Application implements HasActivityInjector {
+    @Inject
+    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+
     @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().create(this);
+    public void onCreate() {
+        super.onCreate();
+        DaggerAppComponent
+                .builder()
+                .application(this)
+                .build()
+                .inject(this);
+
+    }
+
+    @Override
+    public DispatchingAndroidInjector<Activity> activityInjector() {
+        return activityDispatchingAndroidInjector;
     }
 }

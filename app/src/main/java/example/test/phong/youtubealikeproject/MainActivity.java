@@ -8,9 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import dagger.android.support.DaggerAppCompatActivity;
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
+import dagger.android.support.DaggerAppCompatActivity;
+import example.test.phong.youtubealikeproject.util.ActivityUtils;
+
+// TODO: 12/30/2017 screenshot and test automatically
 public class MainActivity extends DaggerAppCompatActivity {
+
+    public static final boolean DEBUG = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,18 @@ public class MainActivity extends DaggerAppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        MainFragment mainFragment =
+                (MainFragment) getSupportFragmentManager().findFragmentById(R.id.root);
+        if (mainFragment == null) {
+            try {
+                mainFragment = MainFragment.newInstance(0);
+                ActivityUtils.addFragmentToActivity(
+                        getSupportFragmentManager(), mainFragment, R.id.root);
+            } catch (ExtractionException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
