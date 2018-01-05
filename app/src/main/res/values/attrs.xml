@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RevealView">
+        <attr name="colorBar" format="color|reference"/>
+        <attr name="contentBar" format="color|reference"/>
+        <attr name="barTitle" format="string" localization="suggested"/>
+        <attr name="message" format="string" localization="suggested"/>
+        <attr name="showMessage" format="boolean"/>
+    </declare-styleable>
+</resources>

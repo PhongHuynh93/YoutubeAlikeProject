@@ -121,6 +121,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         onError(throwable);
+                        throwable.printStackTrace();
                     }
                 });
     }

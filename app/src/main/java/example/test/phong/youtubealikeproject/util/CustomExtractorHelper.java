@@ -6,6 +6,7 @@ import org.schabi.newpipe.extractor.Info;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.kiosk.KioskInfo;
 
+import java.io.InterruptedIOException;
 import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
@@ -113,4 +114,32 @@ public class CustomExtractorHelper {
         });
     }
 
+    public static boolean isInterruptedCaused(Exception throwable) {
+        return CustomExtractorHelper.hasExactCauseThrowable(throwable, InterruptedIOException.class, InterruptedException.class);
+    }
+
+    /**
+     * Check if throwable have the exact cause from one of the causes to check.
+     */
+    public static boolean hasExactCauseThrowable(Throwable throwable, Class<?>... causesToCheck) {
+        // Check if getCause is not the same as cause (the getCause is already the root),
+        // as it will cause a infinite loop if it is
+        Throwable cause, getCause = throwable;
+
+        for (Class<?> causesEl : causesToCheck) {
+            if (throwable.getClass().equals(causesEl)) {
+                return true;
+            }
+        }
+
+        while ((cause = throwable.getCause()) != null && getCause != cause) {
+            getCause = cause;
+            for (Class<?> causesEl : causesToCheck) {
+                if (cause.getClass().equals(causesEl)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

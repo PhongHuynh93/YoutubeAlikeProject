@@ -12,7 +12,7 @@ import example.test.phong.youtubealikeproject.R;
 
 public class StreamInfoItemHolder extends InfoItemHolder {
     public StreamInfoItemHolder(InfoItemBuilder infoItemBuilder, ViewGroup parent) {
-        super(infoItemBuilder, R.layout.list_stream_item, parent);
+        super(infoItemBuilder, R.layout.list_stream_item_test, parent);
     }
 
     @Override
