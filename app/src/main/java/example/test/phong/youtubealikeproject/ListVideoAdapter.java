@@ -1,6 +1,7 @@
 package example.test.phong.youtubealikeproject;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import org.schabi.newpipe.extractor.InfoItem;
@@ -8,6 +9,7 @@ import org.schabi.newpipe.extractor.InfoItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import example.test.phong.youtubealikeproject.databinding.ListStreamItemTestBinding;
 import example.test.phong.youtubealikeproject.ui.adapter.viewholder.InfoItemBuilder;
 import example.test.phong.youtubealikeproject.ui.adapter.viewholder.InfoItemHolder;
 import example.test.phong.youtubealikeproject.ui.adapter.viewholder.StreamInfoItemHolder;
@@ -16,7 +18,7 @@ import example.test.phong.youtubealikeproject.ui.adapter.viewholder.StreamInfoIt
  * Created by user on 12/30/2017.
  */
 
-public class ListVideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ListVideoAdapter extends RecyclerView.Adapter<StreamInfoItemHolder> {
     private List<InfoItem> mDatas;
     private final InfoItemBuilder infoItemBuilder;
 
@@ -26,12 +28,16 @@ public class ListVideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new StreamInfoItemHolder(infoItemBuilder, parent);
+    public StreamInfoItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater =
+                LayoutInflater.from(parent.getContext());
+        ListStreamItemTestBinding itemBinding =
+                ListStreamItemTestBinding.inflate(layoutInflater, parent, false);
+        return new StreamInfoItemHolder(infoItemBuilder, itemBinding);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(StreamInfoItemHolder holder, int position) {
         ((InfoItemHolder) holder).updateFromItem(mDatas.get(position));
     }
 
