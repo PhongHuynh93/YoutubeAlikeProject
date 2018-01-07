@@ -17,7 +17,7 @@ public class VideoViewModel extends ViewModel {
         mVideoModelMutableLiveData.setValue(item);
     }
 
-    public LiveData<VideoModel> getViewModel() {
+    public LiveData<VideoModel> getVideoModel() {
         return mVideoModelMutableLiveData;
     }
 }

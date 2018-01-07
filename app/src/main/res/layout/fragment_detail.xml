@@ -13,7 +13,8 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:contentDescription="@string/detail_thumbnail_view_description"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             tools:ignore="RtlHardcoded"
             tools:layout_height="200dp"
             tools:src="@drawable/dummy_thumbnail"/>

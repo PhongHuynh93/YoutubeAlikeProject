@@ -43,10 +43,10 @@ public class DetailFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ViewModelProviders.of(getActivity()).get(VideoViewModel.class).getViewModel().observe(this, new Observer<VideoModel>() {
+        ViewModelProviders.of(getActivity()).get(VideoViewModel.class).getVideoModel().observe(this, new Observer<VideoModel>() {
             @Override
             public void onChanged(@Nullable VideoModel videoModel) {
-                String url = videoModel.getUrl();
+                String url = videoModel.getImageUrl();
                 mImageLoader.displayImage(getContext(), url, mDataBinding.detailThumbnailImageView);
             }
         });

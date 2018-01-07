@@ -8,14 +8,16 @@ import android.os.Parcelable;
  */
 
 public class VideoModel implements Parcelable {
+    String imageUrl;
     int id;
     String url;
     String name;
 
-    public VideoModel(int id, String url, String name) {
+    public VideoModel(int id, String url, String imageUrl, String name) {
         this.id = id;
         this.url = url;
         this.name = name;
+        this.imageUrl = imageUrl;
     }
 
     public int getId() {
@@ -24,6 +26,10 @@ public class VideoModel implements Parcelable {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getName() {
@@ -37,18 +43,20 @@ public class VideoModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.imageUrl);
         dest.writeInt(this.id);
         dest.writeString(this.url);
         dest.writeString(this.name);
     }
 
     protected VideoModel(Parcel in) {
+        this.imageUrl = in.readString();
         this.id = in.readInt();
         this.url = in.readString();
         this.name = in.readString();
     }
 
-    public static final Parcelable.Creator<VideoModel> CREATOR = new Parcelable.Creator<VideoModel>() {
+    public static final Creator<VideoModel> CREATOR = new Creator<VideoModel>() {
         @Override
         public VideoModel createFromParcel(Parcel source) {
             return new VideoModel(source);

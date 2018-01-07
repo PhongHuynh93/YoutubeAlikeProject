@@ -103,7 +103,7 @@ public class MainFragment extends BaseFragment {
             @Override
             public void selected(StreamInfoItem selectedItem) {
                 // info - when select a video, open video to play
-                NavigationHelper.openVideoDetail(getActivity(), new VideoModel(selectedItem.getServiceId(), selectedItem.getUrl(), selectedItem.getName()));
+                NavigationHelper.openVideoDetail(getActivity(), new VideoModel(selectedItem.getServiceId(), selectedItem.getUrl(), selectedItem.getThumbnailUrl(), selectedItem.getName()));
             }
 
             @Override

@@ -2,7 +2,6 @@ package example.test.phong.youtubealikeproject.ui.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
 import example.test.phong.youtubealikeproject.R;
@@ -20,8 +19,8 @@ public class DetailActivity extends BaseActivity {
     private VideoModel mVideoModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
 
         DetailFragment fragment =
