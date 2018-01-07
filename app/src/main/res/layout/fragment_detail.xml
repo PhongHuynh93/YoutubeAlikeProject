@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/detail_thumbnail_image_view"
+            android:id="@+id/itemThumbnailView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"

@@ -101,9 +101,9 @@ public class MainFragment extends BaseFragment {
         mAdapter = new ListVideoAdapter(mInfoItemBuilder);
         mAdapter.setOnStreamSelectedListener(new InfoItemBuilder.OnInfoItemSelectedListener<StreamInfoItem>() {
             @Override
-            public void selected(StreamInfoItem selectedItem) {
+            public void selected(View view, StreamInfoItem selectedItem) {
                 // info - when select a video, open video to play
-                NavigationHelper.openVideoDetail(getActivity(), new VideoModel(selectedItem.getServiceId(), selectedItem.getUrl(), selectedItem.getThumbnailUrl(), selectedItem.getName()));
+                NavigationHelper.openVideoDetail(getActivity(), view, new VideoModel(selectedItem.getServiceId(), selectedItem.getUrl(), selectedItem.getThumbnailUrl(), selectedItem.getName()));
             }
 
             @Override

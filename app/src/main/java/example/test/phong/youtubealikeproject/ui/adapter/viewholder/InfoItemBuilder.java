@@ -1,6 +1,7 @@
 package example.test.phong.youtubealikeproject.ui.adapter.viewholder;
 
 import android.content.Context;
+import android.view.View;
 
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
@@ -19,7 +20,7 @@ public class InfoItemBuilder {
     private OnInfoItemSelectedListener<StreamInfoItem> onStreamSelectedListener;
 
     public interface OnInfoItemSelectedListener<T extends InfoItem> {
-        void selected(T selectedItem);
+        void selected(View view, T selectedItem);
 
         void held(T selectedItem);
     }

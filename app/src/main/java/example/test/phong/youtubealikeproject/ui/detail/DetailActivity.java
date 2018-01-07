@@ -23,6 +23,9 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
 
+        // Postpone the shared element enter transition.
+        postponeEnterTransition();
+
         DetailFragment fragment =
                 (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.root);
         if (fragment == null) {

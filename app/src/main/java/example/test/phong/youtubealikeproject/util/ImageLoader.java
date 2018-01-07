@@ -1,9 +1,11 @@
 package example.test.phong.youtubealikeproject.util;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestListener;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,5 +24,9 @@ public class ImageLoader {
 
     public void displayImage(Context context, String url, ImageView imageView) {
         Glide.with(context).load(url).into(imageView);
+    }
+
+    public void displayImage(Context context, String url, ImageView imageView, RequestListener<Drawable> listener) {
+        Glide.with(context).load(url).listener(listener).into(imageView);
     }
 }

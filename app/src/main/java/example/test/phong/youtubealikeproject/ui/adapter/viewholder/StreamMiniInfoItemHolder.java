@@ -51,7 +51,7 @@ public class StreamMiniInfoItemHolder extends InfoItemHolder {
             @Override
             public void onClick(View view) {
                 if (itemBuilder.getOnStreamSelectedListener() != null) {
-                    itemBuilder.getOnStreamSelectedListener().selected(item);
+                    itemBuilder.getOnStreamSelectedListener().selected(view, item);
                 }
             }
         });
