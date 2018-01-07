@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,5 +51,9 @@ public class ListVideoAdapter extends RecyclerView.Adapter<StreamInfoItemHolder>
         mDatas.addAll(videoList);
         // FIXME: 12/30/2017 change to used diffutil from rx
         notifyDataSetChanged();
+    }
+
+    public void setOnStreamSelectedListener(InfoItemBuilder.OnInfoItemSelectedListener<StreamInfoItem> listener) {
+        infoItemBuilder.setOnStreamSelectedListener(listener);
     }
 }

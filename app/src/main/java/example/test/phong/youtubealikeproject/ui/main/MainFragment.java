@@ -15,16 +15,18 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.UrlIdHandler;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.kiosk.KioskInfo;
+import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import javax.inject.Inject;
 
-import dagger.android.support.AndroidSupportInjection;
 import example.test.phong.youtubealikeproject.ListVideoAdapter;
 import example.test.phong.youtubealikeproject.R;
 import example.test.phong.youtubealikeproject.databinding.FragmentMainBinding;
+import example.test.phong.youtubealikeproject.model.VideoModel;
 import example.test.phong.youtubealikeproject.ui.BaseFragment;
 import example.test.phong.youtubealikeproject.ui.adapter.viewholder.InfoItemBuilder;
 import example.test.phong.youtubealikeproject.util.CustomExtractorHelper;
+import example.test.phong.youtubealikeproject.util.NavigationHelper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -64,7 +66,6 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidSupportInjection.inject(this);
         if (getArguments() != null) {
             mServiceId = getArguments().getInt(SERVICE);
             mKiosId = getArguments().getString(KIOSID, "Trending");
@@ -98,6 +99,18 @@ public class MainFragment extends BaseFragment {
         RecyclerView recyclerView = mDatabinding.rcv;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ListVideoAdapter(mInfoItemBuilder);
+        mAdapter.setOnStreamSelectedListener(new InfoItemBuilder.OnInfoItemSelectedListener<StreamInfoItem>() {
+            @Override
+            public void selected(StreamInfoItem selectedItem) {
+                // info - when select a video, open video to play
+                NavigationHelper.openVideoDetail(getActivity(), new VideoModel(selectedItem.getServiceId(), selectedItem.getUrl(), selectedItem.getName()));
+            }
+
+            @Override
+            public void held(StreamInfoItem selectedItem) {
+
+            }
+        });
         recyclerView.setAdapter(mAdapter);
 
         // TODO: 12/30/2017 handle loadmore if size > 0

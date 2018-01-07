@@ -41,4 +41,8 @@ public class InfoItemBuilder {
     public OnInfoItemSelectedListener<StreamInfoItem> getOnStreamSelectedListener() {
         return onStreamSelectedListener;
     }
+
+    public void setOnStreamSelectedListener(OnInfoItemSelectedListener<StreamInfoItem> listener) {
+        this.onStreamSelectedListener = listener;
+    }
 }

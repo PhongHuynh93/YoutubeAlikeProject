@@ -2,6 +2,7 @@ package example.test.phong.youtubealikeproject.dagger.module;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import example.test.phong.youtubealikeproject.ui.detail.DetailFragment;
 import example.test.phong.youtubealikeproject.ui.main.MainFragment;
 
 /**
@@ -11,6 +12,9 @@ import example.test.phong.youtubealikeproject.ui.main.MainFragment;
 @Module
 public abstract class MainFragmentProvider {
     // create subcomponent for fragment
-    @ContributesAndroidInjector(modules = {MainFragmentModule.class})
+    @ContributesAndroidInjector(modules = {})
     abstract MainFragment bindMainFragment();
+
+    @ContributesAndroidInjector(modules = {})
+    abstract DetailFragment bindDetailFragment();
 }
