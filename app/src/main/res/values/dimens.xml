@@ -75,4 +75,6 @@
 
     <!-- Kiosk view Dimensions-->
     <dimen name="kiosk_title_text_size">30sp</dimen>
+    <dimen name="normal_font_size">14sp</dimen>
+    <dimen name="less_important_font_size">12sp</dimen>
 </resources>

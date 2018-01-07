@@ -112,6 +112,11 @@ public class Localization {
         }
     }
 
+    /**
+     * @param context
+     * @param viewCount
+     * @return 3M views
+     */
     public static String shortViewCount(Context context, long viewCount) {
         return getQuantity(context, R.plurals.views, R.string.no_views, viewCount, shortCount(context, viewCount));
     }
@@ -125,7 +130,7 @@ public class Localization {
 
         // As we use the already formatted count, is not the responsibility of this method handle long numbers
         // (it probably will fall in the "other" category, or some language have some specific rule... then we have to change it)
-        int safeCount = count > Integer.MAX_VALUE ? Integer.MAX_VALUE : count < Integer.MIN_VALUE ? Integer.MIN_VALUE : (int) count;
+        int safeCount = count > Integer.MAX_VALUE ? Integer.MAX_VALUE : (count < Integer.MIN_VALUE ? Integer.MIN_VALUE : (int) count);
         return context.getResources().getQuantityString(pluralId, safeCount, formattedCount);
     }
 

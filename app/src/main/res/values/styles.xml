@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--note apply font for all text in project-->
+        <!--<a href="https://stackoverflow.com/questions/16404820/how-to-set-default-font-family-for-entire-android-app"></a>-->
+        <item name="android:textViewStyle">@style/fontStyleLarge</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -14,4 +17,8 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <!--font style-->
+    <style name="fontStyleLarge" parent="@android:style/TextAppearance.Large">
+        <item name="android:fontFamily">@font/proxima</item>
+    </style>
 </resources>
