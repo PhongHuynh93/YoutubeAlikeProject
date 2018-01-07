@@ -1,10 +1,9 @@
-package example.test.phong.youtubealikeproject;
+package example.test.phong.youtubealikeproject.ui.main;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +19,10 @@ import org.schabi.newpipe.extractor.kiosk.KioskInfo;
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
+import example.test.phong.youtubealikeproject.ListVideoAdapter;
+import example.test.phong.youtubealikeproject.R;
 import example.test.phong.youtubealikeproject.databinding.FragmentMainBinding;
+import example.test.phong.youtubealikeproject.ui.BaseFragment;
 import example.test.phong.youtubealikeproject.ui.adapter.viewholder.InfoItemBuilder;
 import example.test.phong.youtubealikeproject.util.CustomExtractorHelper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends BaseFragment {
     private static final String SERVICE = "SERVICE";
     private static final String KIOSID = "KIOSID";
     protected boolean DEBUG = MainActivity.DEBUG;

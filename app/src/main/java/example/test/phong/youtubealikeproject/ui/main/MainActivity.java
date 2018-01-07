@@ -1,15 +1,16 @@
-package example.test.phong.youtubealikeproject;
+package example.test.phong.youtubealikeproject.ui.main;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import dagger.android.support.DaggerAppCompatActivity;
+import example.test.phong.youtubealikeproject.R;
+import example.test.phong.youtubealikeproject.ui.BaseActivity;
 import example.test.phong.youtubealikeproject.util.ActivityUtils;
 
 // TODO: 12/30/2017 screenshot and test automatically
-public class MainActivity extends DaggerAppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     public static final boolean DEBUG = false;
 

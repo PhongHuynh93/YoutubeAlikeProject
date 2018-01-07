@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import example.test.phong.youtubealikeproject.MainActivity;
+import example.test.phong.youtubealikeproject.ui.main.MainActivity;
 
 /**
  * Created by user on 12/30/2017.

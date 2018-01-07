@@ -2,7 +2,7 @@ package example.test.phong.youtubealikeproject.dagger.module;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import example.test.phong.youtubealikeproject.MainFragment;
+import example.test.phong.youtubealikeproject.ui.main.MainFragment;
 
 /**
  * Created by user on 12/30/2017.

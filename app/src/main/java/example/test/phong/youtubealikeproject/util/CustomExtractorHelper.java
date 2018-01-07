@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import example.test.phong.youtubealikeproject.MainActivity;
+import example.test.phong.youtubealikeproject.ui.main.MainActivity;
 import io.reactivex.Maybe;
 import io.reactivex.MaybeSource;
 import io.reactivex.Single;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YoutubeAlikeProject</string>
+    <string name="app_name">Youtube</string>
     <string name="main_bg_subtitle">Tap search to get started</string>
     <string name="view_count_text">%1$s views</string>
     <string name="upload_date_text">Published on %1$s</string>
