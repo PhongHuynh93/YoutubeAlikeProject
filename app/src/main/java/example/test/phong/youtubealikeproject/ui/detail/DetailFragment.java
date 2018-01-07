@@ -81,6 +81,11 @@ public class DetailFragment extends BaseFragment {
         });
     }
 
+    /**
+     * : you can verify whether or not allocating the OnPreDrawListener is needed by calling View#isLayoutRequested() beforehand, if necessary.
+     * View#isLaidOut() may come in handy in some cases as well. ↩
+     * <a href="https://www.androiddesignpatterns.com/2015/03/activity-postponed-shared-element-transitions-part3b.html"></a>
+     */
     private void startPostponedEnterTransitionSafe() {
         if (mDataBinding.itemThumbnailView.isLayoutRequested()) {
             mDataBinding.itemThumbnailView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
