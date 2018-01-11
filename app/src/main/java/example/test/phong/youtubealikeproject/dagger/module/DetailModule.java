@@ -8,6 +8,9 @@ import example.test.phong.youtubealikeproject.ui.viewmodel.DetailPresenter;
 
 /**
  * Created by user on 1/11/2018.
+ * used @bind instead of @provide
+ * see advantage
+ * <a href="https://proandroiddev.com/dagger-2-annotations-binds-contributesandroidinjector-a09e6a57758f"></a>
  */
 @Module
 public abstract class DetailModule {
