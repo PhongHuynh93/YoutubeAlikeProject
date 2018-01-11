@@ -11,9 +11,9 @@ import example.test.phong.youtubealikeproject.ui.main.MainActivity;
 @Module
 public abstract class ActivityBuilder {
     // create subcomponent for activity
-    @ContributesAndroidInjector(modules = {MainFragmentProvider.class})
+    @ContributesAndroidInjector(modules = {FragmentProvider.class})
     abstract MainActivity bindMainActivity();
 
-    @ContributesAndroidInjector(modules = {MainFragmentProvider.class})
+    @ContributesAndroidInjector(modules = {FragmentProvider.class})
     abstract DetailActivity bindDetailActivity();
 }

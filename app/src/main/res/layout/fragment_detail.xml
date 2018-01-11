@@ -19,7 +19,9 @@
             tools:layout_height="200dp"
             tools:src="@drawable/dummy_thumbnail"/>
 
-        <include layout="@layout/detail_video_layout"/>
+        <include
+            android:id="@+id/container"
+            layout="@layout/detail_video_layout"/>
     </LinearLayout>
 
 </layout>

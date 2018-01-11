@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.transition.Transition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +24,22 @@ import example.test.phong.youtubealikeproject.R;
 import example.test.phong.youtubealikeproject.databinding.FragmentDetailBinding;
 import example.test.phong.youtubealikeproject.model.VideoModel;
 import example.test.phong.youtubealikeproject.ui.BaseFragment;
+import example.test.phong.youtubealikeproject.ui.DetailContract;
 import example.test.phong.youtubealikeproject.ui.viewmodel.VideoViewModel;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
+import example.test.phong.youtubealikeproject.util.SimpleTransactionListener;
 
 /**
  * Created by user on 1/7/2018.
  */
 
-public class DetailFragment extends BaseFragment {
+public class DetailFragment extends BaseFragment implements DetailContract.View {
     public static final String SHARED_IMAGE_KEY = "SHARED_IMAGE_KEY";
     private static final int MAX_TRANSITION_DELAY = 800;
     @Inject
     ImageLoader mImageLoader;
+    @Inject
+    DetailContract.Presenter mPresenter;
 
     private FragmentDetailBinding mDataBinding;
 
@@ -57,6 +62,8 @@ public class DetailFragment extends BaseFragment {
             @Override
             public void onChanged(@Nullable VideoModel videoModel) {
                 String url = videoModel.getImageUrl();
+                String name = videoModel.getName();
+                mDataBinding.container.textViewTitle.setText(name);
                 // Make sure that transition starts soon even if image is not ready.
                 mDataBinding.itemThumbnailView.postDelayed(new Runnable() {
                     @Override
@@ -77,8 +84,18 @@ public class DetailFragment extends BaseFragment {
                         return false;
                     }
                 });
+
+                getActivity().getWindow().getSharedElementEnterTransition().addListener(new SimpleTransactionListener() {
+                    @Override
+                    public void onTransitionEnd(Transition transition) {
+                        super.onTransitionEnd(transition);
+                        startLoading(videoModel.getId(), videoModel.getUrl(), false);
+                    }
+                });
             }
         });
+
+
     }
 
     /**
@@ -99,5 +116,9 @@ public class DetailFragment extends BaseFragment {
         } else {
             getActivity().startPostponedEnterTransition();
         }
+    }
+
+    private void startLoading(int serviceId, String url, boolean forceLoad) {
+        mPresenter.getData(serviceId, url, forceLoad);
     }
 }

@@ -10,11 +10,11 @@ import example.test.phong.youtubealikeproject.ui.main.MainFragment;
  */
 
 @Module
-public abstract class MainFragmentProvider {
+public abstract class FragmentProvider {
     // create subcomponent for fragment
     @ContributesAndroidInjector(modules = {})
     abstract MainFragment bindMainFragment();
 
-    @ContributesAndroidInjector(modules = {})
+    @ContributesAndroidInjector(modules = {DetailModule.class})
     abstract DetailFragment bindDetailFragment();
 }

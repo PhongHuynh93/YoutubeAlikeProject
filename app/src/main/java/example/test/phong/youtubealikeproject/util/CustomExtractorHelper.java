@@ -5,6 +5,7 @@ import android.util.Log;
 import org.schabi.newpipe.extractor.Info;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.kiosk.KioskInfo;
+import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.io.InterruptedIOException;
 import java.util.concurrent.Callable;
@@ -141,5 +142,15 @@ public class CustomExtractorHelper {
             }
         }
         return false;
+    }
+
+    public Single<StreamInfo> getStreamInfo(int serviceId, String url, boolean forceLoad) {
+        checkServiceId(serviceId);
+        return checkCache(forceLoad, serviceId, url, Single.fromCallable(new Callable<StreamInfo>() {
+            @Override
+            public StreamInfo call() throws Exception {
+                return StreamInfo.getInfo(NewPipe.getService(serviceId), url);
+            }
+        }));
     }
 }
