@@ -11,6 +11,8 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import example.test.phong.youtubealikeproject.dagger.component.DaggerAppComponent;
 import example.test.phong.youtubealikeproject.util.Downloader;
+import example.test.phong.youtubealikeproject.util.NotLoggingTree;
+import timber.log.Timber;
 
 /**
  * Created by user on 12/30/2017.
@@ -32,6 +34,12 @@ public class App extends Application implements HasActivityInjector {
                 .build()
                 .inject(this);
         NewPipe.init(mDownloader);
+
+        // in release, log nothing
+        if (BuildConfig.DEBUG)
+            Timber.plant(new Timber.DebugTree());
+        else
+            Timber.plant(new NotLoggingTree());
     }
 
     @Override
