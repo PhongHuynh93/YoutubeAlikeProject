@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -32,6 +33,7 @@ import example.test.phong.youtubealikeproject.ui.viewmodel.VideoViewModel;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
 import example.test.phong.youtubealikeproject.util.Localization;
 import example.test.phong.youtubealikeproject.util.SimpleTransactionListener;
+import timber.log.Timber;
 
 /**
  * Created by user on 1/7/2018.
@@ -92,10 +94,13 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
                 getActivity().getWindow().getSharedElementEnterTransition().addListener(new SimpleTransactionListener() {
                     @Override
                     public void onTransitionEnd(Transition transition) {
+                        Timber.e("Calling onTransitionEnd");
                         super.onTransitionEnd(transition);
-                        startLoading(videoModel.getId(), videoModel.getUrl(), false);
+                        // when shared element dont only in the first time
+
                     }
                 });
+                startLoading(videoModel.getId(), videoModel.getUrl(), false);
             }
         });
 
@@ -154,7 +159,7 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
 
     @Override
     public void showError(Throwable throwable) {
-
+        Toast.makeText(getContext(), "Calling on error " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

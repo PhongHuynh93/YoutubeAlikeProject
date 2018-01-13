@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
@@ -24,8 +23,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by user on 1/10/2018.
@@ -49,7 +46,6 @@ public class DetailPresenter extends ViewModel implements LifecycleObserver, Det
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onAttach() {
-        Log.e(TAG, "onAttach: Calling onAttach");
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

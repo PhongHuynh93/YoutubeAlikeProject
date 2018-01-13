@@ -19,6 +19,7 @@ import io.reactivex.MaybeSource;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import timber.log.Timber;
 
 /**
  * Created by user on 12/30/2017.
@@ -149,6 +150,7 @@ public class CustomExtractorHelper {
         return checkCache(forceLoad, serviceId, url, Single.fromCallable(new Callable<StreamInfo>() {
             @Override
             public StreamInfo call() throws Exception {
+                Timber.e("calling getStreamInfo");
                 return StreamInfo.getInfo(NewPipe.getService(serviceId), url);
             }
         }));

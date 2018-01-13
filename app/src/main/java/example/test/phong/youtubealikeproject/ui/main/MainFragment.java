@@ -33,6 +33,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * A placeholder fragment containing a simple view.
+ * // TODO: 1/12/2018 make room to save the last previous view 
  */
 public class MainFragment extends BaseFragment {
     private static final String SERVICE = "SERVICE";
