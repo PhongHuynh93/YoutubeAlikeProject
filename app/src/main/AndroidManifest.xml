@@ -25,7 +25,7 @@
 
         <activity
             android:name=".ui.detail.DetailActivity"
-            android:theme="@style/AppTheme.NoActionBar.Transparent"/>
+            android:theme="@style/SharedStyle"/>
 
     </application>
 
