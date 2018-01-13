@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import example.test.phong.youtubealikeproject.databinding.DetailRelatedVideoLayoutBinding;
 import example.test.phong.youtubealikeproject.databinding.DetailVideoLayoutBinding;
 import example.test.phong.youtubealikeproject.ui.detail.type.BaseAdapterType;
@@ -14,13 +16,20 @@ import example.test.phong.youtubealikeproject.ui.detail.videoholder.BaseViewHold
 import example.test.phong.youtubealikeproject.ui.detail.videoholder.DetailViewHolder;
 import example.test.phong.youtubealikeproject.ui.detail.videoholder.RelatedVideoVideoHolder;
 import example.test.phong.youtubealikeproject.util.Constants;
+import example.test.phong.youtubealikeproject.util.ImageLoader;
 
 /**
  * Created by user on 1/13/2018.
  */
 
 public class DetailVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+    private final ImageLoader mImageLoader;
     private List<? extends BaseAdapterType> mList = new ArrayList<>();
+
+    @Inject
+    public DetailVideoAdapter(ImageLoader imageLoader) {
+        mImageLoader = imageLoader;
+    }
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,10 +37,10 @@ public class DetailVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         switch (viewType) {
             case Constants.DETAIL_TYPE:
                 DetailVideoLayoutBinding detailVideoLayoutBinding = DetailVideoLayoutBinding.inflate(layoutInflater, parent, false);
-                return new DetailViewHolder(detailVideoLayoutBinding);
+                return new DetailViewHolder(mImageLoader, detailVideoLayoutBinding);
             case Constants.RELATED_VIDEO_TYPE:
                 DetailRelatedVideoLayoutBinding detailRelatedVideoLayoutBinding = DetailRelatedVideoLayoutBinding.inflate(layoutInflater, parent, false);
-                return new RelatedVideoVideoHolder(detailRelatedVideoLayoutBinding);
+                return new RelatedVideoVideoHolder(mImageLoader, detailRelatedVideoLayoutBinding);
         }
         return null;
     }

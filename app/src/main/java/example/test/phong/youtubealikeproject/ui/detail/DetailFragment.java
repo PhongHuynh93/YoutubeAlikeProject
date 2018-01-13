@@ -47,9 +47,10 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
     ImageLoader mImageLoader;
     @Inject
     DetailContract.Presenter mPresenter;
+    @Inject
+    DetailVideoAdapter mAdapter;
 
     private FragmentDetailBinding mDataBinding;
-    private DetailVideoAdapter mAdapter;
 
     public static DetailFragment newInstance() {
         return new DetailFragment();
@@ -74,7 +75,6 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
 
                 RecyclerView recyclerView = mDataBinding.recyclerview.rcv;
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                mAdapter = new DetailVideoAdapter();
                 recyclerView.setAdapter(mAdapter);
 
 //                mDataBinding.textViewTitle.setText(name);
