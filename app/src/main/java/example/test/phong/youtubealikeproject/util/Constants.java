@@ -6,4 +6,8 @@ package example.test.phong.youtubealikeproject.util;
 
 public class Constants {
     public static final int NO_SERVICE_ID = -1;
+
+    // type for detail
+    public static final int DETAIL_TYPE = 0;
+    public static final int RELATED_VIDEO_TYPE = 1;
 }

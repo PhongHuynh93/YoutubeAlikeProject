@@ -1,7 +1,5 @@
 package example.test.phong.youtubealikeproject.ui;
 
-import android.text.Spanned;
-
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 /**
@@ -14,13 +12,9 @@ public interface DetailContract {
         void showData(StreamInfo result);
 
         void showError(Throwable throwable);
-
-        void showDescription(Spanned spanned);
     }
 
     interface Presenter {
         void getData(int serviceId, String url, boolean forceLoad);
-
-        void formatDescription(String description);
     }
 }

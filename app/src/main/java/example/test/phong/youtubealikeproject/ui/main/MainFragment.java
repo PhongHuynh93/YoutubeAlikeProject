@@ -21,7 +21,7 @@ import javax.inject.Inject;
 
 import example.test.phong.youtubealikeproject.ListVideoAdapter;
 import example.test.phong.youtubealikeproject.R;
-import example.test.phong.youtubealikeproject.databinding.FragmentMainBinding;
+import example.test.phong.youtubealikeproject.databinding.RecyclerviewLayoutBinding;
 import example.test.phong.youtubealikeproject.model.VideoModel;
 import example.test.phong.youtubealikeproject.ui.BaseFragment;
 import example.test.phong.youtubealikeproject.ui.adapter.viewholder.InfoItemBuilder;
@@ -45,7 +45,7 @@ public class MainFragment extends BaseFragment {
     @Inject
     InfoItemBuilder mInfoItemBuilder;
 
-    private FragmentMainBinding mDatabinding;
+    private RecyclerviewLayoutBinding mDatabinding;
     private ListVideoAdapter mAdapter;
     private int mServiceId;
     private String mKiosId;
@@ -90,7 +90,7 @@ public class MainFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mDatabinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
+        mDatabinding = DataBindingUtil.inflate(inflater, R.layout.recyclerview_layout, container, false);
         return mDatabinding.getRoot();
     }
 

@@ -3,25 +3,28 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/itemThumbnailView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:contentDescription="@string/detail_thumbnail_view_description"
             android:scaleType="fitXY"
-            android:adjustViewBounds="true"
             tools:ignore="RtlHardcoded"
             tools:layout_height="200dp"
             tools:src="@drawable/dummy_thumbnail"/>
 
         <include
-            android:id="@+id/container"
-            layout="@layout/detail_video_layout"/>
+            android:id="@+id/recyclerview"
+            layout="@layout/recyclerview_layout"/>
+        <!--<include-->
+        <!--android:id="@+id/container"-->
+        <!--layout="@layout/detail_video_layout"/>-->
     </LinearLayout>
 
 </layout>

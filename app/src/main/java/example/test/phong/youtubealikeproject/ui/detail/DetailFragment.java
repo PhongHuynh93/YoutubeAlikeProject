@@ -7,8 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Spanned;
-import android.transition.Transition;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +22,9 @@ import com.bumptech.glide.request.target.Target;
 
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import example.test.phong.youtubealikeproject.R;
@@ -29,11 +32,9 @@ import example.test.phong.youtubealikeproject.databinding.FragmentDetailBinding;
 import example.test.phong.youtubealikeproject.model.VideoModel;
 import example.test.phong.youtubealikeproject.ui.BaseFragment;
 import example.test.phong.youtubealikeproject.ui.DetailContract;
+import example.test.phong.youtubealikeproject.ui.detail.type.DetailType;
 import example.test.phong.youtubealikeproject.ui.viewmodel.VideoViewModel;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
-import example.test.phong.youtubealikeproject.util.Localization;
-import example.test.phong.youtubealikeproject.util.SimpleTransactionListener;
-import timber.log.Timber;
 
 /**
  * Created by user on 1/7/2018.
@@ -48,6 +49,7 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
     DetailContract.Presenter mPresenter;
 
     private FragmentDetailBinding mDataBinding;
+    private DetailVideoAdapter mAdapter;
 
     public static DetailFragment newInstance() {
         return new DetailFragment();
@@ -69,14 +71,15 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
             public void onChanged(@Nullable VideoModel videoModel) {
                 String url = videoModel.getImageUrl();
                 String name = videoModel.getName();
-                mDataBinding.container.textViewTitle.setText(name);
+
+                RecyclerView recyclerView = mDataBinding.recyclerview.rcv;
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                mAdapter = new DetailVideoAdapter();
+                recyclerView.setAdapter(mAdapter);
+
+//                mDataBinding.textViewTitle.setText(name);
                 // Make sure that transition starts soon even if image is not ready.
-                mDataBinding.itemThumbnailView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getActivity().startPostponedEnterTransition();
-                    }
-                }, MAX_TRANSITION_DELAY);
+                mDataBinding.itemThumbnailView.postDelayed(() -> getActivity().startPostponedEnterTransition(), MAX_TRANSITION_DELAY);
                 mImageLoader.displayImage(getContext(), url, mDataBinding.itemThumbnailView, new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -91,15 +94,6 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
                     }
                 });
 
-                getActivity().getWindow().getSharedElementEnterTransition().addListener(new SimpleTransactionListener() {
-                    @Override
-                    public void onTransitionEnd(Transition transition) {
-                        Timber.e("Calling onTransitionEnd");
-                        super.onTransitionEnd(transition);
-                        // when shared element dont only in the first time
-
-                    }
-                });
                 startLoading(videoModel.getId(), videoModel.getUrl(), false);
             }
         });
@@ -133,28 +127,9 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
 
     @Override
     public void showData(StreamInfo result) {
-        long viewCount = result.getViewCount();
-        String description = result.getDescription();
-        // this is the HD of image -> show again to the cover picture and make the transition has crossfade to move smoothly from slow reso to high reso
-        String thumbUrl = result.getThumbnailUrl();
-        // load the uploader avatar and make the transform has oval shape.
-        String uploaderAvatarUrl = result.getUploaderAvatarUrl();
-
-        // the viewcount 20699438
-        // after format 20,699,438 views
-        if (viewCount >= 0) {
-            mDataBinding.container.textViewViewCount.setText(Localization.localizeViewCount(getContext(), viewCount));
-            mDataBinding.container.textViewViewCount.setVisibility(View.VISIBLE);
-        } else {
-            mDataBinding.container.textViewViewCount.setVisibility(View.GONE);
-        }
-
-        // the description just contains the Html string, we just make that spanned style
-        mPresenter.formatDescription(description);
-        // FIXME: 1/12/2018 make this oval shape
-        mImageLoader.displayImage(getContext(), uploaderAvatarUrl, mDataBinding.container.imageViewUploader);
-        // FIXME: 1/12/2018 make this has transition crossfade smoothly
-//        mImageLoader.displayImageCrossFade(getContext(), thumbUrl, mDataBinding.itemThumbnailView);
+        List<DetailType> detailTypes = new ArrayList<>();
+        detailTypes.add(new DetailType(result));
+        mAdapter.setData(detailTypes);
     }
 
     @Override
@@ -162,8 +137,8 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
         Toast.makeText(getContext(), "Calling on error " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showDescription(Spanned spanned) {
-        mDataBinding.container.textViewDescription.setText(spanned);
-    }
+//    @Override
+//    public void showDescription(Spanned spanned) {
+//        mDataBinding.container.textViewDescription.setText(spanned);
+//    }
 }
