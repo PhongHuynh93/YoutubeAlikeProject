@@ -11,10 +11,12 @@ import javax.inject.Inject;
 
 import example.test.phong.youtubealikeproject.databinding.DetailRelatedVideoLayoutBinding;
 import example.test.phong.youtubealikeproject.databinding.DetailVideoLayoutBinding;
+import example.test.phong.youtubealikeproject.databinding.TitleVideoLayoutBinding;
 import example.test.phong.youtubealikeproject.ui.detail.type.BaseAdapterType;
 import example.test.phong.youtubealikeproject.ui.detail.videoholder.BaseViewHolder;
 import example.test.phong.youtubealikeproject.ui.detail.videoholder.DetailViewHolder;
 import example.test.phong.youtubealikeproject.ui.detail.videoholder.RelatedVideoVideoHolder;
+import example.test.phong.youtubealikeproject.ui.detail.videoholder.TitlelVideoHolder;
 import example.test.phong.youtubealikeproject.util.Constants;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
 
@@ -24,7 +26,7 @@ import example.test.phong.youtubealikeproject.util.ImageLoader;
 
 public class DetailVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private final ImageLoader mImageLoader;
-    private List<? extends BaseAdapterType> mList = new ArrayList<>();
+    private List<BaseAdapterType> mList = new ArrayList<>();
 
     @Inject
     public DetailVideoAdapter(ImageLoader imageLoader) {
@@ -35,6 +37,9 @@ public class DetailVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
+            case Constants.TITLE_VIDEO:
+                TitleVideoLayoutBinding titleVideoLayoutBinding = TitleVideoLayoutBinding.inflate(layoutInflater, parent, false);
+                return new TitlelVideoHolder(titleVideoLayoutBinding);
             case Constants.DETAIL_TYPE:
                 DetailVideoLayoutBinding detailVideoLayoutBinding = DetailVideoLayoutBinding.inflate(layoutInflater, parent, false);
                 return new DetailViewHolder(mImageLoader, detailVideoLayoutBinding);
@@ -62,9 +67,9 @@ public class DetailVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return mList.size();
     }
 
-    public void setData(List<? extends BaseAdapterType> listData) {
-        mList.clear();
-        mList = listData;
+    public void setData(List<BaseAdapterType> listData) {
+        // TODO: 1/21/2018 replace with diffutil
+        mList.addAll(listData);
         notifyDataSetChanged();
     }
 }

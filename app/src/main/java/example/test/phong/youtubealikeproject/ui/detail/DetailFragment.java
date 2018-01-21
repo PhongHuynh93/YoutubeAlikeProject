@@ -32,7 +32,9 @@ import example.test.phong.youtubealikeproject.databinding.FragmentDetailBinding;
 import example.test.phong.youtubealikeproject.model.VideoModel;
 import example.test.phong.youtubealikeproject.ui.BaseFragment;
 import example.test.phong.youtubealikeproject.ui.DetailContract;
+import example.test.phong.youtubealikeproject.ui.detail.type.BaseAdapterType;
 import example.test.phong.youtubealikeproject.ui.detail.type.DetailType;
+import example.test.phong.youtubealikeproject.ui.detail.type.TitleType;
 import example.test.phong.youtubealikeproject.ui.viewmodel.VideoViewModel;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
 
@@ -76,6 +78,12 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
                 RecyclerView recyclerView = mDataBinding.recyclerview.rcv;
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setAdapter(mAdapter);
+
+                List<BaseAdapterType> titleTypes = new ArrayList<>();
+                titleTypes.add(new TitleType(name));
+                mAdapter.setData(titleTypes);
+                // FIXME: 1/21/2018 change to diffutil
+                mAdapter.notifyDataSetChanged();
 
 //                mDataBinding.textViewTitle.setText(name);
                 // Make sure that transition starts soon even if image is not ready.
@@ -127,7 +135,7 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
 
     @Override
     public void showData(StreamInfo result) {
-        List<DetailType> detailTypes = new ArrayList<>();
+        List<BaseAdapterType> detailTypes = new ArrayList<>();
         detailTypes.add(new DetailType(result));
         mAdapter.setData(detailTypes);
     }

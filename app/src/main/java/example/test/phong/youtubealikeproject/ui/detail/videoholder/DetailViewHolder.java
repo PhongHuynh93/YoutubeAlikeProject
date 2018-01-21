@@ -30,6 +30,7 @@ public class DetailViewHolder extends BaseViewHolder<DetailType> {
     @Override
     public void bind(DetailType detailType) {
         StreamInfo result = detailType.getData();
+
         long viewCount = result.getViewCount();
 
         String description = result.getDescription();

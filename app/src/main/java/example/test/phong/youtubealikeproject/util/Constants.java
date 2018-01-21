@@ -10,4 +10,5 @@ public class Constants {
     // type for detail
     public static final int DETAIL_TYPE = 0;
     public static final int RELATED_VIDEO_TYPE = 1;
+    public static final int TITLE_VIDEO = 2;
 }
