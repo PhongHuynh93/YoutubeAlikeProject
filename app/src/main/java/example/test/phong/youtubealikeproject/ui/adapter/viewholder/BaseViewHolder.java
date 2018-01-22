@@ -1,4 +1,4 @@
-package example.test.phong.youtubealikeproject.ui.detail.videoholder;
+package example.test.phong.youtubealikeproject.ui.adapter.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

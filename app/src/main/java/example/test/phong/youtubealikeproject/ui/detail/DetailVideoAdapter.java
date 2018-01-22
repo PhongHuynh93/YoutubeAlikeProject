@@ -9,14 +9,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import example.test.phong.youtubealikeproject.databinding.DetailRelatedVideoLayoutBinding;
 import example.test.phong.youtubealikeproject.databinding.DetailVideoLayoutBinding;
+import example.test.phong.youtubealikeproject.databinding.ListStreamItemTestBinding;
 import example.test.phong.youtubealikeproject.databinding.TitleVideoLayoutBinding;
+import example.test.phong.youtubealikeproject.ui.adapter.viewholder.BaseViewHolder;
+import example.test.phong.youtubealikeproject.ui.adapter.viewholder.DetailViewHolder;
+import example.test.phong.youtubealikeproject.ui.adapter.viewholder.NextVideoVideoHolder;
+import example.test.phong.youtubealikeproject.ui.adapter.viewholder.RelatedVideoVideoHolder;
+import example.test.phong.youtubealikeproject.ui.adapter.viewholder.TitlelVideoHolder;
 import example.test.phong.youtubealikeproject.ui.detail.type.BaseAdapterType;
-import example.test.phong.youtubealikeproject.ui.detail.videoholder.BaseViewHolder;
-import example.test.phong.youtubealikeproject.ui.detail.videoholder.DetailViewHolder;
-import example.test.phong.youtubealikeproject.ui.detail.videoholder.RelatedVideoVideoHolder;
-import example.test.phong.youtubealikeproject.ui.detail.videoholder.TitlelVideoHolder;
 import example.test.phong.youtubealikeproject.util.Constants;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
 
@@ -44,8 +45,13 @@ public class DetailVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 DetailVideoLayoutBinding detailVideoLayoutBinding = DetailVideoLayoutBinding.inflate(layoutInflater, parent, false);
                 return new DetailViewHolder(mImageLoader, detailVideoLayoutBinding);
             case Constants.RELATED_VIDEO_TYPE:
-                DetailRelatedVideoLayoutBinding detailRelatedVideoLayoutBinding = DetailRelatedVideoLayoutBinding.inflate(layoutInflater, parent, false);
-                return new RelatedVideoVideoHolder(mImageLoader, detailRelatedVideoLayoutBinding);
+                ListStreamItemTestBinding relatedVideoBinding =
+                        ListStreamItemTestBinding.inflate(layoutInflater, parent, false);
+                return new RelatedVideoVideoHolder(mImageLoader, relatedVideoBinding);
+            case Constants.NEXT_VIDEO_TYPE:
+                ListStreamItemTestBinding nextVideoBinding =
+                        ListStreamItemTestBinding.inflate(layoutInflater, parent, false);
+                return new NextVideoVideoHolder(mImageLoader, nextVideoBinding);
         }
         return null;
     }
@@ -67,6 +73,7 @@ public class DetailVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return mList.size();
     }
 
+    // note - not clear here
     public void setData(List<BaseAdapterType> listData) {
         // TODO: 1/21/2018 replace with diffutil
         mList.addAll(listData);

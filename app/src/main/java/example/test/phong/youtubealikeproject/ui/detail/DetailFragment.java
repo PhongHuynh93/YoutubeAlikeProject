@@ -34,9 +34,13 @@ import example.test.phong.youtubealikeproject.ui.BaseFragment;
 import example.test.phong.youtubealikeproject.ui.DetailContract;
 import example.test.phong.youtubealikeproject.ui.detail.type.BaseAdapterType;
 import example.test.phong.youtubealikeproject.ui.detail.type.DetailType;
+import example.test.phong.youtubealikeproject.ui.detail.type.NextVideoType;
+import example.test.phong.youtubealikeproject.ui.detail.type.RelatedVideoType;
 import example.test.phong.youtubealikeproject.ui.detail.type.TitleType;
 import example.test.phong.youtubealikeproject.ui.viewmodel.VideoViewModel;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
+
+import static example.test.phong.youtubealikeproject.util.Constants.INITIAL_RELATED_VIDEOS;
 
 /**
  * Created by user on 1/7/2018.
@@ -135,9 +139,23 @@ public class DetailFragment extends BaseFragment implements DetailContract.View 
 
     @Override
     public void showData(StreamInfo result) {
-        List<BaseAdapterType> detailTypes = new ArrayList<>();
-        detailTypes.add(new DetailType(result));
-        mAdapter.setData(detailTypes);
+        List<BaseAdapterType> baseTypeList = new ArrayList<>();
+        baseTypeList.add(new DetailType(result));
+
+        // may has only one next video
+        if (result.getNextVideo() != null) {
+            baseTypeList.add(new NextVideoType(result.getNextVideo()));
+        }
+
+        // may has multiple related video
+        if (result.getRelatedStreams() != null && !result.getRelatedStreams().isEmpty()) {
+            // this maybe contains large number, so put some in show more
+            int numbRelatedVid = result.getRelatedStreams().size() >= INITIAL_RELATED_VIDEOS ? INITIAL_RELATED_VIDEOS : result.getRelatedStreams().size();
+            for (int i = 0; i < numbRelatedVid; i++) {
+                baseTypeList.add(new RelatedVideoType(result.getRelatedStreams().get(i)));
+            }
+        }
+        mAdapter.setData(baseTypeList);
     }
 
     @Override

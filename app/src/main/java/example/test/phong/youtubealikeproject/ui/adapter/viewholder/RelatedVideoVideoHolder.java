@@ -1,8 +1,8 @@
-package example.test.phong.youtubealikeproject.ui.detail.videoholder;
+package example.test.phong.youtubealikeproject.ui.adapter.viewholder;
 
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
-import example.test.phong.youtubealikeproject.databinding.DetailRelatedVideoLayoutBinding;
+import example.test.phong.youtubealikeproject.databinding.ListStreamItemTestBinding;
 import example.test.phong.youtubealikeproject.util.ImageLoader;
 
 /**
@@ -10,9 +10,9 @@ import example.test.phong.youtubealikeproject.util.ImageLoader;
  */
 
 public class RelatedVideoVideoHolder extends BaseViewHolder<StreamInfo> {
-    private final DetailRelatedVideoLayoutBinding mBinding;
+    private final ListStreamItemTestBinding mBinding;
 
-    public RelatedVideoVideoHolder(ImageLoader imageLoader, DetailRelatedVideoLayoutBinding binding) {
+    public RelatedVideoVideoHolder(ImageLoader imageLoader, ListStreamItemTestBinding binding) {
         super(binding.getRoot());
         mBinding = binding;
     }

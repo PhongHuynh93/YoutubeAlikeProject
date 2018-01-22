@@ -1,4 +1,4 @@
-package example.test.phong.youtubealikeproject.ui.detail.videoholder;
+package example.test.phong.youtubealikeproject.ui.adapter.viewholder;
 
 import example.test.phong.youtubealikeproject.databinding.TitleVideoLayoutBinding;
 import example.test.phong.youtubealikeproject.ui.detail.type.TitleType;
